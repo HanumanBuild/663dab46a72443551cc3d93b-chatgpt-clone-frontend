@@ -6,8 +6,12 @@ function Register() {
   const [password, setPassword] = useState('');
 
   const handleRegister = async () => {
-    const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/register`, { username, password });
-    console.log(response.data); // Handle registration logic
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/register`, { username, password });
+      console.log('Registration successful:', response.data);
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
   };
 
   return (

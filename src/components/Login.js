@@ -6,8 +6,12 @@ function Login() {
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, { username, password });
-    console.log(response.data); // Handle login logic
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, { username, password });
+      console.log('Login successful:', response.data);
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
   return (

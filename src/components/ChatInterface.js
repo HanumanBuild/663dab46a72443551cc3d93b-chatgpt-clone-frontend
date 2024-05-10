@@ -6,9 +6,13 @@ function ChatInterface() {
   const [input, setInput] = useState('');
 
   const sendMessage = async () => {
-    const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/messages`, { text: input });
-    setMessages([...messages, { text: input, isUser: true }, { text: response.data, isUser: false }]);
-    setInput('');
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/messages`, { text: input });
+      setMessages([...messages, { text: input, isUser: true }, { text: response.data.message, isUser: false }]);
+      setInput('');
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
   };
 
   return (
